@@ -448,28 +448,24 @@ void Tree:: magnifyByType(string type, int value){
 
     Iterate();
 }
-/*void Tree::levelOrder(Fruit* root) {
+void Tree::levelOrder(Fruit* root) {
        list <Fruit*>  fruits;
-        fruits.push_front(root);
+        fruits.push_back(root);
         int index=0;
         while(index<fruits.size() ){
-            Fruit* node=fruits.(index++);
+            Fruit* node;
                           
-                if (node.left!= null) {
-                           arr.add(node.left);
+                if (node->getLeft()!= NULL) {
+                           fruits.push_back(node->getLeft());
                 }
-                   if (node.right!= null) {
-                           arr.add(node.right);
-                }
-              
-            
-            
+                   if (node->getRight()!= NULL) {
+                         //  fruits.(node->getRight(_));
+                }          
         }
         for(int i=0;i<fruits.size();i++){
-            System.out.print(fruits.get(i).data+" ");
         }
       
-    }*/
+    }
 int main() { 
 Tree b;
 root=b.Insert(NULL,root,"Grape", 50); 
