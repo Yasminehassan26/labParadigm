@@ -329,7 +329,7 @@ void Tree ::IterateHelper(string type)
     }
     stack<Fruit*> stack;
     Fruit* currentFruit=root;
-    cout<<"the "<<type<<" : ";
+    cout<<"the "<<type<<" :\n ";
     while (!stack.empty() || currentFruit!=NULL )
     {
         while(currentFruit!=NULL)
