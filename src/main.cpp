@@ -589,7 +589,7 @@ int main()
     b.Insert(NULL,root,"GooseBerry", 50);
      b.Insert(NULL,root,"ElderBerry", 90);
 	cout<<"\n----------------------------------------------------- iteration 1 \n ";
-  //  b.Iterate();
+    b.Iterate();
     b.Insert(NULL,root,"Apple", 30); 
 	cout<<"\n----------------------------------------------------- iteration 2 \n ";
     b.deleteFruit(80);
