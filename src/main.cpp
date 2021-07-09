@@ -552,8 +552,6 @@ void Tree::print(Fruit* node)
     cout <<"My type is: " <<node->getSpecific()<<" ,my weight is :" << node->getWeight() <<" and : "<<node->getTaste()<<"\n";
 }
 
-
-
 int main()
 {
     Tree b;
@@ -584,7 +582,7 @@ int main()
 	cout<<"\n----------------------------------------------------- filter by type \n ";
     b.filterByType("Berry");
 	cout<<"\n----------------------------------------------------- magnify \n ";
-    b.magnifyByType("Grape",100);
+    b.magnifyByType("Grape",10);
 
     return 0;
 }
