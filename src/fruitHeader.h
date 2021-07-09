@@ -41,6 +41,7 @@ class Fruit{
         Fruit* Insert(Fruit*,Fruit*, std::string,int );
         Fruit* InsertHelper(std::string,int);
         Fruit* findSuccessor(Fruit*,Fruit*,int);
+       Fruit* findPredecessor(Fruit*);
         Fruit* searchForNode(Fruit*,Fruit* , int );
         Fruit* deleteFruit(int);
      

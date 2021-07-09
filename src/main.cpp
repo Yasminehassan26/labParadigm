@@ -305,7 +305,6 @@ void Tree:: magnifyByType(string type, int value)
         if(currentFruit ->getType().find(type)!= string::npos)
         {
             toMagnify.push_back(currentFruit);
-			deleteFruit(currentFruit ->getWeight());
         }
         nodes.pop();
         currentFruit = currentFruit->getRight();
@@ -314,6 +313,7 @@ void Tree:: magnifyByType(string type, int value)
     {
         Fruit* current= toMagnify.front();
         int newWeight = (current->getWeight()) + value;
+        deleteFruit(current ->getWeight());
         Insert(NULL,root,current->getSpecific(),newWeight);
         toMagnify.pop_front();
     }
@@ -464,7 +464,6 @@ Fruit* Tree::findSuccessor(Fruit* node, Fruit* suc,int key)
     }
 }
 
-//////////////////////////////////////////////
 Fruit* Tree::searchForNode(Fruit* parent,Fruit* node, int key)
 {
 
@@ -486,7 +485,20 @@ Fruit* Tree::searchForNode(Fruit* parent,Fruit* node, int key)
         return searchForNode(node,node->getLeft(), key);
     }
 }
-
+Fruit* Tree::findPredecessor(Fruit* node)
+{
+        Fruit* pre=new Fruit();
+        if (node->getRight()!=NULL)
+        {
+            Fruit* currentNode = node->getRight();
+            while (currentNode->getLeft()!=NULL)
+            {
+                currentNode = currentNode->getLeft();
+            }
+            pre = currentNode;
+        }
+        return pre;      
+}
 Fruit* Tree::deleteFruit(int key)
 {
 
@@ -497,27 +509,38 @@ Fruit* Tree::deleteFruit(int key)
     if (node->getLeft()==NULL)
     {
         Fruit* parent=getParent();
-        if(parent->getLeft()==node)
+         Fruit* temp=node->getRight();
+        if(node==root)
         {
-            parent->setLeft(node->getRight());
+            root=temp;            
         }
-        else
+        else if(parent->getLeft()==node)
         {
-            parent->setRight(node->getRight());
+            parent->setLeft(temp);
         }
+        else if(parent->getRight()==node)
+        {
+            parent->setRight(temp);
+        }     
     }
     //step2
     else if (node->getRight()==NULL)
     {
         Fruit* parent=getParent();
-        if(parent->getLeft()==node)
-        {
-            parent->setLeft(node->getLeft());
+        Fruit* temp=node->getLeft();
+        if(node==root)
+        {        
+            root=temp;
         }
-        else
+        else if(parent->getLeft()==node)
         {
-            parent->setRight(node->getLeft());
+            parent->setLeft(temp);
         }
+         else if(parent->getRight()==node)
+        {
+            parent->setRight(temp);
+        }
+        
     }
     //step3
     else
@@ -541,12 +564,11 @@ Fruit* Tree::deleteFruit(int key)
         {
             parent->setRight(newNode);
         }
-
-
     }
 
     return node;
 }
+
 void Tree::print(Fruit* node)
 {
     cout <<"My type is: " <<node->getSpecific()<<" ,my weight is :" << node->getWeight() <<" and : "<<node->getTaste()<<"\n";
@@ -564,13 +586,19 @@ int main()
     b.Insert(NULL,root,"Berry", 70);
     b.Insert(NULL,root,"Strawberry",5);
     b.Insert(NULL,root,"BlueBerry", 80);
+    b.Insert(NULL,root,"GooseBerry", 50);
+     b.Insert(NULL,root,"ElderBerry", 90);
 	cout<<"\n----------------------------------------------------- iteration 1 \n ";
-    b.Iterate();
-    b.Insert(NULL,root,"Apple", 60);
+  //  b.Iterate();
     b.Insert(NULL,root,"Apple", 30); 
 	cout<<"\n----------------------------------------------------- iteration 2 \n ";
-	b.Iterate();
     b.deleteFruit(80);
+    b.deleteFruit(50);
+    b.deleteFruit(70);
+   /*  b.deleteFruit(90);
+      b.deleteFruit(60);
+      b.Iterate();
+      cout<<"root : "<<root->getWeight();*/
 	Fruit* min=b.findLightest();
 	cout<<" min : " ;
 	b.print(min);
@@ -582,7 +610,7 @@ int main()
 	cout<<"\n----------------------------------------------------- filter by type \n ";
     b.filterByType("Berry");
 	cout<<"\n----------------------------------------------------- magnify \n ";
-    b.magnifyByType("Grape",10);
+    b.magnifyByType("Berry",10);
 
     return 0;
 }
