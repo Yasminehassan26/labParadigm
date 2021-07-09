@@ -43,7 +43,8 @@ class Fruit{
         Fruit* findSuccessor(Fruit*,Fruit*,int);
         Fruit* searchForNode(Fruit*,Fruit* , int );
         Fruit* deleteFruit(int);
-       void levelOrder(Fruit* ) ;
+     
+       void print(Fruit* ) ;
 
 };
 //subclasses
